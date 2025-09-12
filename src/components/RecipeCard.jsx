@@ -1,75 +1,55 @@
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card'
-import { Clock, Users, AlertTriangle } from 'lucide-react'
+import people from '../assets/people.png'
+import time from '../assets/time.png'
 
-export default function RecipeCard() {
+const RecipeCard = ({ recipe }) => {
   return (
-    <Card className="bg-white shadow-md rounded-2xl p-4 w-full max-w-md border border-gray-100">
-      {/* Header with Dish Name */}
-      <CardHeader>
-        <h2 className="text-xl font-semibold text-gray-800">
-          Margherita Pizza
-        </h2>
-      </CardHeader>
-
-      {/* Cooking Info */}
-      <CardContent className="space-y-3">
-        <div className="flex items-center gap-4 text-gray-600">
-          <div className="flex items-center gap-2">
-            <Clock size={18} className="text-orange-500" />
-            <span>30 mins</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Users size={18} className="text-green-600" />
-            <span>2 servings</span>
-          </div>
-        </div>
-
-        {/* Ingredients Section */}
-        <div>
-          <h3 className="font-medium text-gray-700 mb-1">
+    <div className="w-full m-auto my-7 md:my-10 rounded-2xl p-8 bg-[#D1FEC0]">
+      <h3 className="text-2xl font-medium text-stone-700">
+        {recipe.recipeName}
+      </h3>
+      <div className="my-2 flex">
+        <span className="flex text-stone-500 font-medium">
+          <img src={time} alt="Time" className="h-5 mr-2" />
+          {recipe.estimatedTime}
+        </span>
+        <span className="ml-12 md:ml-16 flex text-stone-500 font-medium">
+          <img src={people} alt="Servings" className="h-5 mr-2" />
+          {recipe.servings}
+        </span>
+      </div>
+      <div className="md:flex">
+        <div className="mt-4 md:mr-24">
+          <span className="text-lg font-medium text-stone-600">
             Ingredients you have:
-          </h3>
-          <ul className="list-disc list-inside text-gray-600 text-sm">
-            <li>Pizza dough</li>
-            <li>Tomato sauce</li>
-            <li>Fresh mozzarella</li>
-            <li>Olive oil</li>
-            <li>Basil leaves</li>
+          </span>
+          <ul className="list-disc pl-4 marker:text-stone-400 md:marker:text-xl">
+            {recipe.ingredientsYouHave.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
           </ul>
         </div>
-
-        {/* Missing Ingredients */}
-        <div className="bg-red-50 p-2 rounded-lg">
-          <div className="flex items-center gap-2 text-red-600 font-medium">
-            <AlertTriangle size={16} />
-            Missing Ingredients
-          </div>
-          <ul className="list-disc list-inside text-red-500 text-sm mt-1">
-            <li>Oregano</li>
-            <li>Parmesan cheese</li>
+        <div className="mt-4">
+          <span className="mt-10 text-lg font-medium text-stone-600">
+            Missing ingredients:
+          </span>
+          <ul className="list-disc pl-4 marker:text-stone-400 md:marker:text-xl">
+            {recipe.missingIngredients.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
           </ul>
         </div>
-
-        {/* Cooking Steps */}
-        <div>
-          <h3 className="font-medium text-gray-700 mb-1">Steps to cook:</h3>
-          <ol className="list-decimal list-inside text-gray-600 text-sm space-y-1">
-            <li>Preheat oven to 475°F (245°C).</li>
-            <li>Roll out the pizza dough on a floured surface.</li>
-            <li>Spread tomato sauce evenly over the base.</li>
-            <li>Add mozzarella slices and drizzle olive oil.</li>
-            <li>Bake for 10–12 minutes until golden.</li>
-            <li>Top with fresh basil leaves before serving.</li>
-          </ol>
-        </div>
-      </CardContent>
-
-      {/* Footer */}
-      <CardFooter className="flex justify-end">
-        <button className="bg-orange-400 hover:bg-orange-500 text-white px-4 py-2 rounded-xl shadow-sm transition">
-          Start Cooking
-        </button>
-      </CardFooter>
-    </Card>
+      </div>
+      <div className="mt-4">
+        <span className="text-lg font-medium text-stone-600">
+          Steps to make:
+        </span>
+        <ul className="list-disc pl-4 marker:text-stone-400 md:marker:text-xl">
+          {recipe.steps.map((step, i) => (
+            <li key={i}>{step}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
   )
 }
+export default RecipeCard

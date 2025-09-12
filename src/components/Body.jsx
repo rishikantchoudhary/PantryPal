@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import search from '../assets/search.png'
@@ -6,33 +6,21 @@ import search from '../assets/search.png'
 const Body = () => {
   const inputRef = useRef()
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     const ingredients = inputRef.current.value.trim()
     if (!ingredients) return
 
-    try {
-      const backendUrl = 'https://pantrypal-backend-nbft.onrender.com/recipes'
-      const response = await fetch(backendUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ingredients: ingredients }),
-      })
+    setLoading(true) // disable button
 
-      const data = await response.json()
-      console.log('Backend response:', data)
-
-      // Navigate to recipes page
-      navigate('/recipes', { state: { recipes: data.recipes } })
-    } catch (error) {
-      console.error('Error fetching recipes:', error)
-    }
-
+    // Clear input immediately
     inputRef.current.value = ''
+
+    // Navigate instantly and let Recipes page handle API
+    navigate('/recipes', { state: { ingredients } })
   }
 
   return (
@@ -49,10 +37,11 @@ const Body = () => {
         />
         <button
           type="submit"
-          className="w-[30%] min-w-[170px] h-11 md:flex-1 flex items-center justify-evenly bg-[#F4AF48] hover:bg-[#EF8641] text-stone-800 border-stone-400 border-2 rounded-lg"
+          disabled={loading}
+          className="w-[30%] min-w-[170px] h-11 md:flex-1 flex items-center justify-evenly bg-[#F4AF48] hover:bg-[#EF8641] text-stone-800 border-stone-400 border-2 rounded-lg hover:cursor-pointer"
         >
           <img src={search} className="h-5" />
-          Find Recipes
+          {loading ? 'Loading...' : 'Find Recipes'}
         </button>
       </form>
       <div className="w-[100%]">
