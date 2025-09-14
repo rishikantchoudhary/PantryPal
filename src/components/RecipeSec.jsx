@@ -18,7 +18,7 @@ const RecipeSec = ({ ingredients }) => {
 
     const fetchRecipes = async () => {
       try {
-        const backendUrl = 'https://pantrypal-backend-nbft.onrender.com/recipes'
+        const backendUrl = 'https://pantrypal-backend-46sv.onrender.com/recipes'
         const response = await fetch(backendUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -59,6 +59,12 @@ const RecipeSec = ({ ingredients }) => {
       <div className="text-center py-20">
         <p className="text-stone-600">Oops! Some problem occured :\</p>
         <p className="text-stone-600">Try again after some time.</p>
+        <button
+          className="mx-auto w-24 h-11 block bg-[#F4AF48] hover:bg-[#EF8641] text-stone-700 border-stone-400 border-2 rounded-lg hover:cursor-pointer"
+          onClick={handleClick}
+        >
+          Go Back
+        </button>
       </div>
     )
   }

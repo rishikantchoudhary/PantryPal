@@ -10,7 +10,7 @@ const Header = () => {
   }
 
   return (
-    <div className="w-screen bg-[#D1FEC0]">
+    <div className="w-full bg-[#D1FEC0]">
       <div className="w-[90%] md:w-[80%] max-w-[1700px] m-auto py-4 flex flex-col md:flex-row items-start md:items-center justify-between">
         <img
           src={logo}

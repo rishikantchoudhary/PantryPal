@@ -7,14 +7,14 @@ const RecipeCard = ({ recipe }) => {
       <h3 className="text-2xl font-medium text-stone-700">
         {recipe.recipeName}
       </h3>
-      <div className="my-2 flex">
+      <div className="my-2 flex flex-col md:flex-row">
         <span className="flex text-stone-500 font-medium">
           <img src={time} alt="Time" className="h-5 mr-2" />
-          {recipe.estimatedTime}
+          {recipe.estimatedTime} minutes
         </span>
-        <span className="ml-12 md:ml-16 flex text-stone-500 font-medium">
+        <span className="mt-2 md:mt-0 md:ml-16 flex text-stone-500 font-medium">
           <img src={people} alt="Servings" className="h-5 mr-2" />
-          {recipe.servings}
+          {recipe.servings} servings
         </span>
       </div>
       <div className="md:flex">
